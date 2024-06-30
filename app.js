@@ -1,5 +1,6 @@
 let numeroSecreto = 0;
 let intentos = 0;
+let listaNumerosSortedos = [];
 
 function asignarTextoElementos(elemento, texto) {
     let elementoHTML = document.querySelector(elemento);
@@ -10,7 +11,7 @@ function asignarTextoElementos(elemento, texto) {
 function verificarIntento() {
     let numeroDeUsuario = parseInt(document.getElementById('valorUsuario').value);
 
-    intentos++; 
+
 
     if (numeroDeUsuario == numeroSecreto) {
         asignarTextoElementos('p', `Acertaste el número en ${intentos} ${(intentos == 1) ? 'vez' : 'veces'}`);
@@ -22,6 +23,7 @@ function verificarIntento() {
             asignarTextoElementos('p', 'El número es mayor');
         }
         limpiarCaja();
+        intentos++; 
     }
     return;
 }
@@ -38,7 +40,15 @@ function limpiarCaja() {
 }
 
 function generarNumeroSecreto() {
-    return Math.floor(Math.random() * 10) + 1;
+    let numeroGenerado = Math.floor(Math.random() * 10) + 1;
+    console.log(numeroGenerado);
+    if(listaNumerosSortedos.includes(numeroGenerado)){
+        return generarNumeroSecreto();
+    }else{
+        listaNumerosSortedos.push(numeroGenerado);
+        return numeroGenerado;
+    }
+
 }
 
 function reiniciarJuego() {
