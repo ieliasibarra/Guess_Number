@@ -1,6 +1,8 @@
 let numeroSecreto = 0;
 let intentos = 0;
 let listaNumerosSortedos = [];
+let numeroMaximo = 10;
+
 
 function asignarTextoElementos(elemento, texto) {
     let elementoHTML = document.querySelector(elemento);
@@ -42,6 +44,12 @@ function limpiarCaja() {
 function generarNumeroSecreto() {
     let numeroGenerado = Math.floor(Math.random() * 10) + 1;
     console.log(numeroGenerado);
+    console.log(listaNumerosSortedos);
+    // si ya sorteamos todos los numeros 
+    if(listaNumerosSortedos.length == numeroMaximo){
+        asignarTextoElementos('p','Ya se sortearon todos los numeros posibles');
+    }
+
     if(listaNumerosSortedos.includes(numeroGenerado)){
         return generarNumeroSecreto();
     }else{
